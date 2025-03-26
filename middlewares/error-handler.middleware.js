@@ -33,7 +33,7 @@ exports.errorHandler = (error, req, res, next) => {
       res.status(UNAUTHORIZED).json({ message: error.message });
       break;
     case error instanceof ValidationError:
-      res.status(BAD_REQUEST).json({ error: error.message });
+      res.status(BAD_REQUEST).json({ message: error.message });
       break;
     default:
       res.status(INTERNAL_SERVER_ERROR).json({ message: error.message });

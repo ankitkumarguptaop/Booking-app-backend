@@ -10,6 +10,11 @@ router.use(
 );
 
 
+router.use(
+  "/events",
+  authMiddleware.jwtTokenValidation,
+  require("./event.routes")
+);
 
 
 module.exports = router;
