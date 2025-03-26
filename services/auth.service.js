@@ -1,25 +1,25 @@
 const { BadRequest, ForBidden, UnAuthorized } = require("../libs/errors");
-const {userRepository, imageRepository} = require("../repositories");
+const { userRepository, imageRepository } = require("../repositories");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 exports.signUp = async (payload) => {
-  const { name, email, password ,role } = payload.body;
+  const { name, email, password, role } = payload.body;
 
-  const path  = payload?.file?.path || null;
+  const path = payload?.file?.path || null;
 
   if (await userRepository.findOne({ email: email })) {
     throw new ForBidden("User alredy exists");
   }
- 
+
   const user = await userRepository.create({
     name: name,
     email: email,
     password: password,
-    profile_image : path,
-    role : role
+    profile_image: path,
+    role: role,
   });
-  
+
   return user;
 };
 
@@ -45,6 +45,6 @@ exports.signIn = async (payload) => {
   if (!validate) {
     throw new UnAuthorized("Unauthorised access Password not matched!");
   }
-   
-  return { token: generateToken(user.id), user: user  };
+
+  return { token: generateToken(user.id), user: user };
 };
