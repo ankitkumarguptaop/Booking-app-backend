@@ -1,4 +1,7 @@
 "use strict";
+
+const { DataTypes } = require('sequelize');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -30,6 +33,16 @@ module.exports = {
         type: Sequelize.STRING,
       },
       seats: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      status: {
+        allowNull: false,
+        type: DataTypes.ENUM,
+        values: ["pending", "rejected", "approved"],
+        defaultValue: "pending",
+      },
+      ticket_price: {
         allowNull: false,
         type: Sequelize.STRING,
       },

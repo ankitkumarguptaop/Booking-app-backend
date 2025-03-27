@@ -1,6 +1,6 @@
 "use strict";
 
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 const { sequelize } = require("../configs/db");
 const Users = require("./user");
 
@@ -46,6 +46,12 @@ const event = sequelize.define(
       allowNull: false,
       type: Sequelize.DATE,
     },
+    status: {
+      allowNull: false,
+      type: DataTypes.ENUM,
+      values: ["pending", "rejected", "approved"],
+      defaultValue: "pending",
+    },
     creater_id: {
       allowNull: false,
       type: Sequelize.INTEGER,
@@ -54,7 +60,10 @@ const event = sequelize.define(
         key: "id",
       },
     },
-
+    ticket_price: {
+      allowNull: false,
+      type: Sequelize.STRING,
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
@@ -73,7 +82,6 @@ const event = sequelize.define(
     paranoid: true,
   }
 );
-
 
 event.belongsTo(Users, {
   as: "user",

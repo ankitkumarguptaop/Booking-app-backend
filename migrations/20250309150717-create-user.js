@@ -34,6 +34,7 @@ module.exports = {
           type: DataTypes.ENUM,
           values: ['normal', 'admin', 'superadmin'],
         },
+     
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE,

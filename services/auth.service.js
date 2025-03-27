@@ -1,5 +1,5 @@
 const { BadRequest, ForBidden, UnAuthorized } = require("../libs/errors");
-const { userRepository, imageRepository } = require("../repositories");
+const { userRepository } = require("../repositories");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 

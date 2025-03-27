@@ -16,5 +16,11 @@ router.use(
   require("./event.routes")
 );
 
+router.use(
+  "/seats",
+  authMiddleware.jwtTokenValidation,
+  require("./seat.routes")
+);
+
 
 module.exports = router;

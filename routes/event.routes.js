@@ -4,15 +4,14 @@ const router = express.Router();
 const { imageUpload } = require("../middlewares");
 
 router.get("/", eventController.listEvent);
+router.get("/admins", eventController.listAdminEvent);
+router.get("/pending", eventController.listPendingEvent);
 router.post(
   "/",
   imageUpload.uplaod().single("image"),
   eventController.createEvent
 );
-router.delete(
-  "/:id",
-  eventController.deleteEvent
-);
+router.delete("/:id", eventController.deleteEvent);
 router.patch("/:id", eventController.updateEvent);
 
 module.exports = router;
