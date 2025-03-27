@@ -1,5 +1,6 @@
 const seatRepository = require("../repositories/seat.repository");
-
+const Producer = require("../workers/producer");
+const producer = new Producer()
 exports.allocateSeats = async (payload) => {
   const { totalSeats, eventId } = payload.body;
   
@@ -11,6 +12,9 @@ exports.allocateSeats = async (payload) => {
   }
 
   const response = await seatRepository.createBulk(seats);
+
+  await producer.publishMessage("Mail", "hhhhhhhhhhhhhhhhhhhh", "sendMail");
+
   return response;
 };
 

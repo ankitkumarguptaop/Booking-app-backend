@@ -8,7 +8,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { errorHandler } = require("./middlewares/error-handler.middleware");
-
+const Consumer = require("./workers/consumer");
+const {consumeMessage} =new Consumer;
 const app = express();
 const server = require("http").createServer(app);
 
@@ -37,6 +38,7 @@ app.use(express.urlencoded({ extended: true })); //for file data
 app.use("/uploads", express.static("uploads")); // for read static files
 
 app.use("/", require("./routes"));
+consumeMessage()
 app.use(errorHandler);
 
 

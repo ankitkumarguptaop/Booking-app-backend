@@ -6,7 +6,7 @@ exports.createEvent = async (payload) => {
   const { name, details, seats, timing, ticketPrice } = payload.body;
   const { id } = payload.user;
   const path = payload?.file?.path || null;
-  const response = await seatRepository.create({
+  const response = await eventRepository.create({
     name: name,
     details: details,
     image: path,
