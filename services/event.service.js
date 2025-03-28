@@ -77,17 +77,21 @@ exports.listAdminEvent = async (payload) => {
   return response;
 };
 
-exports.listPendingEvent = async (payload) => {
-  const { page = 1, limit = 5, search } = payload.query;
+exports.listAllEvent = async (payload) => {
+  const { page = 1, limit = 5, search ,status } = payload.query;
+console.log('✌️status --->', status);
   let offset = 0;
   if (page && limit) {
     offset = limit * (page - 1);
   }
-  let whereObj = { status: "pending" };
+  let whereObj = {};
   if (search) {
     whereObj[Sequelize.Op.or] = [
       { name: { [Sequelize.Op.iLike]: `%${search}%` } },
     ];
+  }
+  if(status){
+    whereObj["status"]=status;
   }
   const response = await eventRepository.findAndCountAll({
     criteria: whereObj,
@@ -101,8 +105,6 @@ exports.listPendingEvent = async (payload) => {
 
 exports.updateEvent = async (payload) => {
   const { id } = payload.params;
-  console.log("✌️payload.params --->", payload.params);
-  console.log("✌️id --->", id);
 
   if (!id) {
     throw BadRequest("event id not given");

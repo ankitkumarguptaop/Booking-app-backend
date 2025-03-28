@@ -3,9 +3,9 @@ const { eventController } = require("../controllers");
 const router = express.Router();
 const { imageUpload } = require("../middlewares");
 
-router.get("/", eventController.listEvent);
+router.get("/approved", eventController.listEvent);
 router.get("/admins", eventController.listAdminEvent);
-router.get("/pending", eventController.listPendingEvent);
+router.get("/", eventController.listAllEvent);
 router.post(
   "/",
   imageUpload.uplaod().single("image"),

@@ -31,6 +31,7 @@ app.use(
 );
 
 
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true })); // extended  true is for nested data
@@ -56,9 +57,9 @@ io.on("connection", (socket) => {
     console.log("joined chats room :", socket.id, roomIds);
   });
 
-  socket.on("message-sender", ({ room, message }) => {
-    console.log("message-sender", room, message);
-    io.to(room).emit("message-reciever", message); //for all members 
+  socket.on("send-notification", ({ room, message }) => {
+    console.log("send-notification", room, message);
+    io.to(room).emit("notification-reciever", message); //for all members 
   });
 
  

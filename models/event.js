@@ -29,7 +29,7 @@ const event = sequelize.define(
       type: Sequelize.STRING,
       validate: {
         len: {
-          args: [10, 100],
+          args: [10, 1000],
           msg: "detail length should lies between 10 to 100",
         },
       },
@@ -42,6 +42,10 @@ const event = sequelize.define(
       allowNull: false,
       type: Sequelize.STRING,
     },
+    // place: {
+    //    allowNull: false,
+    //   type: Sequelize.STRING,
+    // },
     timing: {
       allowNull: false,
       type: Sequelize.DATE,

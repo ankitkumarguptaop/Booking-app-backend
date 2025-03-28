@@ -46,9 +46,9 @@ exports.listAdminEvent = async (req, res, next) => {
   }
 };
 
-exports.listPendingEvent = async (req, res, next) => {
+exports.listAllEvent = async (req, res, next) => {
   try {
-    const response = await eventService.listPendingEvent({
+    const response = await eventService.listAllEvent({
       body: req.body,
       query: req.query,
       params: req.params,
