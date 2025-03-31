@@ -67,6 +67,7 @@ exports.updateEvent = async (req, res, next) => {
       body: req.body,
       query: req.query,
       params: req.params,
+      file: req.file,
     });
     res.status(OK).json({ message: "successfuly list Event", event: response });
   } catch (error) {

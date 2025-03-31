@@ -22,5 +22,10 @@ router.use(
   require("./seat.routes")
 );
 
+router.use(
+  "/messages",
+  authMiddleware.jwtTokenValidation,
+  require("./message.routes")
+);
 
 module.exports = router;

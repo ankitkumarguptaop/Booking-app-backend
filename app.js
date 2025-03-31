@@ -30,8 +30,6 @@ app.use(
   })
 );
 
-
-
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true })); // extended  true is for nested data
@@ -42,29 +40,31 @@ app.use("/", require("./routes"));
 consumeMessage()
 app.use(errorHandler);
 
-
 io.on("connection", (socket) => {
-  console.log(`connect ${socket.id}`);
+  console.log(` User Connected: ${socket.id}`);
+
   socket.on("ping", (cb) => {
-    console.log("ping");
+    console.log("Received ping from client");
     cb();
   });
-  
+
   socket.on("join-chats", (roomIds) => {
-    console.log("sdnsajnd0",socket.id)
-    console.log("sdandsj ashw3e",socket.rooms)
-    socket.join(roomIds);
-    console.log("joined chats room :", socket.id, roomIds);
+      socket.join(roomIds);
+    console.log(`${socket.id} joined rooms:`, roomIds);
   });
 
   socket.on("send-notification", ({ room, message }) => {
-    console.log("send-notification", room, message);
-    io.to(room).emit("notification-reciever", message); //for all members 
+    console.log(` Notification sent to ${room}:`, message);
+    io.to(room).emit("notification-receiver", message);
+  });
+  
+  socket.on("send-message", ({ room, message }) => {
+    console.log(` Message sent to ${room}:`, message);
+    io.to(room).emit("message-receiver", message);
   });
 
- 
   socket.on("disconnect", () => {
-    console.log(`disconnect ${socket.id}`);
+    console.log(` User Disconnected: ${socket.id}`);
   });
 });
 

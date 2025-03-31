@@ -78,8 +78,8 @@ exports.listAdminEvent = async (payload) => {
 };
 
 exports.listAllEvent = async (payload) => {
-  const { page = 1, limit = 5, search ,status } = payload.query;
-console.log('✌️status --->', status);
+  const { page = 1, limit = 5, search, status } = payload.query;
+  console.log('✌️status --->', status);
   let offset = 0;
   if (page && limit) {
     offset = limit * (page - 1);
@@ -90,8 +90,8 @@ console.log('✌️status --->', status);
       { name: { [Sequelize.Op.iLike]: `%${search}%` } },
     ];
   }
-  if(status){
-    whereObj["status"]=status;
+  if (status) {
+    whereObj["status"] = status;
   }
   const response = await eventRepository.findAndCountAll({
     criteria: whereObj,
@@ -111,8 +111,9 @@ exports.updateEvent = async (payload) => {
   }
 
   const response = await eventRepository.update({
-    payload: payload.body,
+    payload: {...payload.body ,image: payload?.file?.path || null},
     criteria: { id: parseInt(id) },
   });
+ 
   return response;
 };

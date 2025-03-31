@@ -4,4 +4,5 @@ module.exports = {
     eventService: require("./event.service"),
     seatService: require("./seat.service"),
     mailService: require("./mail.service"),
+    messageService: require("./message.service"),
 }
