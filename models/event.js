@@ -35,17 +35,13 @@ const event = sequelize.define(
       },
     },
     image: {
-      allowNull: false,
       type: Sequelize.STRING,
     },
     seats: {
       allowNull: false,
       type: Sequelize.STRING,
     },
-    // place: {
-    //    allowNull: false,
-    //   type: Sequelize.STRING,
-    // },
+   
     timing: {
       allowNull: false,
       type: Sequelize.DATE,

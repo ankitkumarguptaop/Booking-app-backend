@@ -111,7 +111,7 @@ exports.updateEvent = async (payload) => {
   }
 
   const response = await eventRepository.update({
-    payload: {...payload.body ,image: payload?.file?.path || null},
+    payload: payload.body ,
     criteria: { id: parseInt(id) },
   });
  
